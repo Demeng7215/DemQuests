@@ -1,0 +1,10 @@
+name: DemQuests
+version: '${project.version}'
+main: dev.demeng.demquests.DemQuests
+api-version: 1.18
+description: Simple quests plugin.
+
+libraries:
+  - mysql:mysql-connector-java:8.0.27
+  - org.slf4j:slf4j-api:1.7.32
+  - org.slf4j:slf4j-simple:1.7.32

@@ -1,0 +1,46 @@
+# Configuration file for DemQuests.
+
+# Settings related to where DemQuests should store data.
+storage:
+  # Credentials to your database.
+  host: "localhost"
+  port: 3306
+  database: "minecraft"
+  user: "root"
+  password: "root"
+
+  # Additional options DemQuests will append to the JDBC connection URL.
+  # These options are added after "jdbc:mysql://{host}:{port}/{database}".
+  additional-options: "?autoReconnect=true&useSSL=false"
+
+# Configuration for quests.
+quests:
+  # The quest ID- do not change.
+  walk:
+    # The rewards for completing this quest.
+    rewards:
+      # The threshold that must be reached for the commands to be executed.
+      # In this case, this is 10 blocks walked.
+      # Use %player% for the name of the player.
+      10:
+        - "say %player% has walked 10 blocks!"
+      20:
+        - "say %player% has walked 20 blocks!"
+      30:
+        - "say %player% has walked 30 blocks!"
+  break-blocks:
+    rewards:
+      5:
+        - "say %player% broke 5 blocks!"
+  place-blocks:
+    rewards:
+      5:
+        - "say %player% placed 5 blocks!"
+  execute-commands:
+    rewards:
+      5:
+        - "say %player% executed 5 commands!"
+  kill-mobs:
+    rewards:
+      5:
+        - "say %player% killed 5 mobs!"
