@@ -8,7 +8,6 @@ import dev.demeng.pluginbase.Registerer;
 import dev.demeng.pluginbase.TaskUtils;
 import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -50,14 +49,16 @@ public class DataManager implements Listener {
       }
     });
 
-    for (Map.Entry<Integer, List<String>> rewards : quest.getRewards().entrySet()) {
-      if (originalProgress < rewards.getKey() && newProgress >= rewards.getKey()) {
-        for (String command : rewards.getValue()) {
-          Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command
-              .replace("%player%", p.getName()));
-        }
-      }
-    }
+    quest.getRewards().entrySet().stream()
+        .filter(entry -> originalProgress < entry.getKey())
+        .filter(entry -> newProgress >= entry.getKey())
+        .map(Map.Entry::getValue)
+        .forEachOrdered(commands -> {
+          for (String command : commands) {
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(),
+                command.replace("%player%", p.getName()));
+          }
+        });
   }
 
   public void loadData(Player p) {
