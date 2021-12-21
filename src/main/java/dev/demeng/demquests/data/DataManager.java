@@ -6,6 +6,7 @@ import dev.demeng.demquests.util.Utils;
 import dev.demeng.pluginbase.Common;
 import dev.demeng.pluginbase.TaskUtils;
 import java.sql.SQLException;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
@@ -49,12 +50,9 @@ public class DataManager implements Listener {
         .filter(entry -> originalProgress < entry.getKey())
         .filter(entry -> newProgress >= entry.getKey())
         .map(Map.Entry::getValue)
-        .forEachOrdered(commands -> {
-          for (String command : commands) {
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(),
-                command.replace("%player%", p.getName()));
-          }
-        });
+        .flatMap(Collection::stream)
+        .forEachOrdered(command -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(),
+            command.replace("%player%", p.getName())));
   }
 
   public void loadData(Player p) {
