@@ -4,11 +4,11 @@ import dev.demeng.demquests.DemQuests;
 import dev.demeng.demquests.model.Quest;
 import dev.demeng.demquests.util.Utils;
 import dev.demeng.pluginbase.Common;
-import dev.demeng.pluginbase.Registerer;
 import dev.demeng.pluginbase.TaskUtils;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
+import lombok.RequiredArgsConstructor;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -17,15 +17,11 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
+@RequiredArgsConstructor
 public class DataManager implements Listener {
 
   private final DemQuests i;
   private final Map<Player, Map<Quest, Integer>> progress = new HashMap<>();
-
-  public DataManager(DemQuests i) {
-    this.i = i;
-    Registerer.registerListener(this);
-  }
 
   public Map<Quest, Integer> getProgress(Player p) {
     return progress.get(p);

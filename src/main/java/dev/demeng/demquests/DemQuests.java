@@ -50,6 +50,7 @@ public final class DemQuests extends BasePlugin {
     }
 
     getLogger().info("Registering listeners...");
+    Registerer.registerListener(dataManager);
     Registerer.registerListener(new QuestProgressListener(this));
 
     ChatUtils.console("&aDemQuests v" + Common.getVersion() + " has been enabled.");
